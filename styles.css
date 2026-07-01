@@ -105,8 +105,8 @@
   /* ---- Insignia / logotipo ---- */
   .logo-badge{
     position:relative;
-    width: 150px;
-    height: 150px;
+    width: 132px;
+    height: 132px;
     margin-bottom: 26px;
   }
   .logo-badge::before{
