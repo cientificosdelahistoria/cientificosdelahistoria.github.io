@@ -1,1 +1,1 @@
-hola
+"Científicos de la Historia" es un proyecto de divulgación digital enfocado en narrar las biografías, descubrimientos y el legado de las mentes más brillantes de la ciencia a través de un tono narrativo, histórico, técnico y misterioso. Su identidad visual está inspirada en la exploración y la ciencia clásica, utilizando como símbolos principales una brújula histórica, engranajes mecánicos y los anillos vibrantes de un átomo.
