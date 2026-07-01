@@ -1,222 +1,511 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
-    <title>EduSer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #a2d9f7;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-        .header {
-            background-color: #4a90e2;
-            color: white;
-            padding: 20px;
-            font-size: 40px;
-            font-weight: bold;
-        }
-        .container {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 20px;
-        }
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 15px;
-            border-radius: 60px;
-            width: 100%;
-            box-shadow: 0px 20px 20px rgba(10, 10, 10, 2);
-        }
-        .card h3 {
-            color: #1f618d;
-        }
-      .container1 {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            margin: 10px;
-        }
-        .card1 {
-            background: white;
-            padding: 40px;
-            margin: 5px;
-            border-radius: 80px;
-            width: 80%;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .card h4 {
-            color: #1f618d;
-        }
-      .editable-text {
-            text-align: center;
-            font-size: 36px;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-      .editable-text span {
-            color:  #1f618d;
-        }
-        .competencias {
-            background: white;
-            padding: 20px;
-            margin: 20px auto;
-            width: 80%;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .competencias ul {
-            list-style: none;
-            padding: 0;
-        }
-        .competencias li {
-            background: #f3f3f3;
-            margin: 5px 0;
-            padding: 10px;
-            border-radius: 5px;
-        }
-        .upload-section {
-            background: white;
-            padding: 20px;
-            margin: 20px auto;
-            width: 50%;
-            border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        .container {
-            background-color: white;
-            width: 90%;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-        th {
-            background-color: #3b78c2;
-            color: white;
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Científicos de la Historia</title>
+<meta name="description" content="Científicos de la Historia — biografías, descubrimientos y legado narrados con misterio y rigor.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Space+Mono:wght@400;700&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    /* ---- Paleta extraída de la imagen ---- */
+    --navy-950:#040d18;
+    --navy-900:#081b30;
+    --navy-800:#0c2843;
+    --navy-700:#123354;
+    --cyan-neon:#5EEAE0;
+    --cyan-bright:#9CF7EF;
+    --cyan-dim: rgba(94, 234, 224, .35);
+    --gold:#C9A15C;
+    --gold-light:#E8CB8F;
+    --text-main:#EAF6F5;
+    --text-dim:#93AEC0;
+    --teal-text:#3BC2B6;
+
+    --font-display:'Cormorant Garamond', serif;
+    --font-mono:'Space Mono', monospace;
+    --font-body:'Work Sans', sans-serif;
+
+    --card-radius: 14px;
+    --border-hair: 1px solid rgba(201,161,92,.35);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    font-family: var(--font-body);
+    color: var(--text-main);
+    background-color: var(--navy-950);
+    min-height:100svh;
+    position:relative;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  /* ---------------------------------------------
+     FONDO — imagen fija + veladura para legibilidad
+  --------------------------------------------- */
+  .bg-layer{
+    position:fixed;
+    inset:0;
+    z-index:-2;
+    background-image:url('bg.jpg');
+    background-size:cover;
+    background-position: center 18%;
+    background-repeat:no-repeat;
+    filter: saturate(1.05);
+  }
+  .bg-veil{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+    background:
+      radial-gradient(ellipse 90% 55% at 50% 0%, rgba(4,13,24,.35) 0%, rgba(4,13,24,.72) 55%, rgba(4,13,24,.92) 100%),
+      linear-gradient(180deg, rgba(4,13,24,.55) 0%, rgba(4,13,24,.55) 30%, rgba(4,13,24,.88) 68%, var(--navy-950) 100%);
+  }
+
+  /* ---------------------------------------------
+     UTILIDADES / TIPOGRAFÍA
+  --------------------------------------------- */
+  .eyebrow{
+    font-family: var(--font-mono);
+    font-size: .68rem;
+    letter-spacing: .32em;
+    text-transform: uppercase;
+    color: var(--cyan-bright);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:.6em;
+  }
+  .eyebrow::before, .eyebrow::after{
+    content:'';
+    width: 20px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--cyan-neon));
+  }
+  .eyebrow::after{ background: linear-gradient(90deg, var(--cyan-neon), transparent); }
+
+  /* ---------------------------------------------
+     LAYOUT GENERAL
+  --------------------------------------------- */
+  .wrap{
+    max-width: 620px;
+    margin: 0 auto;
+    padding: 0 22px;
+  }
+
+  /* ---------------------------------------------
+     HERO
+  --------------------------------------------- */
+  .hero{
+    min-height: 100svh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding: 64px 22px 40px;
+    position:relative;
+  }
+
+  /* ---- Insignia / logotipo ---- */
+  .logo-badge{
+    position:relative;
+    width: 132px;
+    height: 132px;
+    margin-bottom: 26px;
+  }
+  .logo-badge::before{
+    content:'';
+    position:absolute;
+    inset: -34px;
+    z-index:-1;
+    background: radial-gradient(circle, rgba(94,234,224,.32) 0%, rgba(94,234,224,.12) 45%, transparent 72%);
+    filter: blur(6px);
+    animation: pulse-glow 4.5s ease-in-out infinite;
+  }
+  .logo-badge .ring{
+    width:100%;
+    height:100%;
+    border-radius:50%;
+    overflow:hidden;
+    background: var(--navy-900);
+    box-shadow:
+      0 0 0 1px rgba(201,161,92,.55),
+      0 0 24px rgba(94,234,224,.35),
+      0 10px 30px rgba(0,0,0,.5);
+  }
+  .logo-badge img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  @keyframes pulse-glow{
+    0%,100%{ opacity:.75; transform: scale(1); }
+    50%{ opacity:1; transform: scale(1.06); }
+  }
+
+  @media (min-width:560px){
+    .logo-badge{ width:168px; height:168px; }
+  }
+
+  .hero h1{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.4rem, 9vw, 3.6rem);
+    line-height: 1.05;
+    letter-spacing: .01em;
+    background: linear-gradient(180deg, #FFFDF6 0%, var(--gold-light) 55%, var(--gold) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 34px rgba(201,161,92,.25);
+    margin-bottom: 6px;
+  }
+
+  .hero .subtitle{
+    font-family: var(--font-mono);
+    font-size: .78rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--teal-text);
+    margin-bottom: 26px;
+  }
+
+  .hero p.tagline{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.08rem, 4vw, 1.32rem);
+    line-height: 1.55;
+    color: var(--text-main);
+    max-width: 480px;
+    text-shadow: 0 2px 18px rgba(0,0,0,.6);
+  }
+
+  .hero p.tagline .accent{
+    color: var(--cyan-bright);
+    font-style: normal;
+    font-family: var(--font-body);
+    font-weight: 600;
+  }
+
+  .scroll-cue{
+    position:absolute;
+    bottom: 26px;
+    left:50%;
+    transform: translateX(-50%);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:6px;
+    color: var(--cyan-dim);
+  }
+  .scroll-cue span{
+    font-family: var(--font-mono);
+    font-size: .6rem;
+    letter-spacing: .3em;
+    color: var(--text-dim);
+  }
+  .scroll-cue svg{
+    width:14px; height:14px;
+    animation: bob 2.2s ease-in-out infinite;
+  }
+  @keyframes bob{
+    0%,100%{ transform: translateY(0); opacity:.5; }
+    50%{ transform: translateY(6px); opacity:1; }
+  }
+
+  /* ---------------------------------------------
+     DIVISOR
+  --------------------------------------------- */
+  .divider{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap: 14px;
+    padding: 6px 22px 44px;
+  }
+  .divider .line{
+    height:1px;
+    width: 72px;
+    background: linear-gradient(90deg, transparent, rgba(201,161,92,.6));
+  }
+  .divider .line.right{ background: linear-gradient(90deg, rgba(201,161,92,.6), transparent); }
+  .divider .diamond{
+    width:7px; height:7px;
+    background: var(--cyan-neon);
+    transform: rotate(45deg);
+    box-shadow: 0 0 10px 2px var(--cyan-dim);
+  }
+
+  /* ---------------------------------------------
+     SECCIÓN DE ENLACES
+  --------------------------------------------- */
+  .links-section{
+    padding: 0 0 90px;
+  }
+
+  .links-section .eyebrow{ margin-bottom: 30px; }
+
+  .card-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 560px){
+    .card-grid{
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+  }
+
+  .card{
+    position:relative;
+    display:flex;
+    align-items:center;
+    gap: 16px;
+    padding: 18px 20px;
+    border-radius: var(--card-radius);
+    text-decoration:none;
+    color: var(--text-main);
+    background: linear-gradient(135deg, rgba(18,51,84,.42), rgba(8,27,48,.32));
+    border: var(--border-hair);
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.06),
+      0 8px 24px rgba(0,0,0,.35);
+    overflow:hidden;
+    isolation:isolate;
+    transition: transform .35s cubic-bezier(.2,.8,.2,1), border-color .35s ease, box-shadow .35s ease, background .35s ease;
+  }
+
+  .card::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:-1;
+    opacity:0;
+    background: radial-gradient(circle at 30% 20%, rgba(94,234,224,.30), transparent 60%);
+    transition: opacity .4s ease;
+  }
+
+  .card .icon-wrap{
+    flex:0 0 auto;
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border: 1px solid rgba(94,234,224,.4);
+    background: rgba(4,13,24,.4);
+    color: var(--cyan-bright);
+    transition: box-shadow .35s ease, color .35s ease, border-color .35s ease;
+  }
+  .card .icon-wrap svg{ width: 22px; height: 22px; }
+
+  .card .label{
+    display:flex;
+    flex-direction:column;
+    gap: 2px;
+  }
+  .card .label .name{
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.28rem;
+    letter-spacing:.01em;
+  }
+  .card .label .handle{
+    font-family: var(--font-mono);
+    font-size: .66rem;
+    letter-spacing: .12em;
+    color: var(--text-dim);
+    text-transform: uppercase;
+  }
+
+  .card .arrow{
+    margin-left:auto;
+    flex:0 0 auto;
+    width: 16px; height:16px;
+    color: var(--gold);
+    opacity: .7;
+    transform: translateX(0);
+    transition: transform .35s ease, opacity .35s ease;
+  }
+
+  .card:hover, .card:focus-visible{
+    transform: translateY(-3px);
+    border-color: var(--cyan-neon);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,.08),
+      0 0 0 1px rgba(94,234,224,.25),
+      0 10px 34px rgba(0,0,0,.45),
+      0 0 30px -4px rgba(94,234,224,.55);
+  }
+  .card:hover::before, .card:focus-visible::before{ opacity:1; }
+  .card:hover .icon-wrap, .card:focus-visible .icon-wrap{
+    border-color: var(--cyan-bright);
+    box-shadow: 0 0 16px rgba(94,234,224,.6);
+    color:#fff;
+  }
+  .card:hover .arrow, .card:focus-visible .arrow{ transform: translateX(4px); opacity:1; }
+
+  .card:active{ transform: translateY(-1px) scale(.99); }
+
+  /* ---------------------------------------------
+     FOOTER
+  --------------------------------------------- */
+  footer{
+    text-align:center;
+    padding: 0 22px 48px;
+    color: var(--text-dim);
+  }
+  footer .coords{
+    font-family: var(--font-mono);
+    font-size: .62rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    opacity: .65;
+    margin-bottom: 10px;
+  }
+  footer .credo{
+    font-family: var(--font-display);
+    font-style: italic;
+    font-size: .98rem;
+    color: var(--text-dim);
+  }
+  footer .credo .accent{ color: var(--teal-text); font-style:normal; }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+    html{ scroll-behavior:auto; }
+  }
+</style>
 </head>
 <body>
-    <div class="header">Bienvenido a EduSer</div>
-  <h1 style="color: #1f618d;">EduSer</h1>
-    
-    <img src="https://raw.githubusercontent.com/Jonnatan1308/EduSer/7cd4058091b2e52e09cf58f8b4cfc1366bb07a9d/Logo.jpg" alt="Logo EduSer" width="800">
-      
-      
-  <div class="editable-text">
-        <span>Quienes Somos</span>
+
+  <div class="bg-layer" aria-hidden="true"></div>
+  <div class="bg-veil" aria-hidden="true"></div>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero">
+    <div class="logo-badge">
+      <span class="ring">
+        <picture>
+          <source srcset="logo.webp" type="image/webp">
+          <img src="logo.png" alt="Científicos de la Historia — brújula, engranajes y anillos de átomo">
+        </picture>
+      </span>
     </div>
-       <div class="container1">
-       <div class="card1">
-    <p style="color: #000000 ;text-align: justify">Somos una institución educativa que cree en la educación como un camino para el crecimiento integral de cada estudiante. Nuestra misión va más allá de la enseñanza de contenidos académicos; buscamos formar personas seguras de sí mismas, capaces de gestionar sus emociones, relacionarse de manera sana con los demás y afrontar los desafíos de la vida con resiliencia y determinación.
 
-Creemos firmemente que el aprendizaje se fortalece cuando los estudiantes desarrollan habilidades socioemocionales que les permiten conocerse a sí mismos, regular sus emociones, establecer relaciones positivas y tomar decisiones responsables. Por ello, nuestra propuesta educativa combina una formación académica de excelencia con un acompañamiento que prioriza el bienestar emocional y el desarrollo de habilidades clave para la vida.
+    <h1>Crónicas del<br>Conocimiento</h1>
+    <p class="subtitle">Científicos de la Historia</p>
 
-Nuestra comunidad educativa está conformada por docentes apasionados, psicólogos especializados y familias comprometidas con el crecimiento personal de sus hijos. Juntos, creamos un entorno seguro, inclusivo y motivador, donde cada estudiante encuentra el apoyo necesario para alcanzar su máximo potencial, no solo en lo académico, sino también en lo personal y social. </p>
-         </div>
-         <br>
-    <div class="container">
-       <div class="card">
-            <h3 style="color: #1f618d; font-size: 22px;text-align:left;">Nuestra Misión</h3>
-            <p style=";text-align: justify">Formar estudiantes íntegros, autónomos y comprometidos con su propio desarrollo y con el bienestar de su comunidad. Nos esforzamos por ofrecer una educación de calidad que equilibre el conocimiento académico con el desarrollo socioemocional, permitiendo que cada niño y joven descubra su potencial, fortalezca su identidad y cultive relaciones positivas basadas en el respeto, la empatía y la cooperación.
+    <p class="tagline">Cada descubrimiento esconde un enigma. Exploramos las vidas, los métodos<br>
+      y el <span class="accent">legado oculto</span> de las mentes que trazaron el rumbo de la ciencia.</p>
 
-Promovemos un ambiente escolar en el que la confianza, la seguridad emocional y la motivación sean pilares fundamentales. Creemos que el aprendizaje sucede de manera más efectiva cuando los estudiantes se sienten comprendidos, valorados y apoyados en su proceso de crecimiento.
-
-A través de estrategias innovadoras, un equipo docente altamente capacitado y un enfoque centrado en la persona, buscamos que nuestros estudiantes adquieran herramientas para la vida, desarrollen un pensamiento crítico y sean ciudadanos responsables, capaces de construir un mundo más justo y humano.</p>
-        </div>
-        <div class="card">
-            <h3 style="color: #1f618d; font-size: 22px;text-align:left;">Nuestra Visión</h3>
-            <p style="text-align: justify">Nos proyectamos como una institución educativa de referencia en el desarrollo de habilidades socioemocionales, donde cada estudiante tenga la oportunidad de crecer en un entorno seguro y enriquecedor. Queremos ser reconocidos por nuestra capacidad de formar personas emocionalmente inteligentes, capaces de afrontar los retos del futuro con confianza, resiliencia y responsabilidad social.
-
-Imaginamos un mundo en el que nuestros egresados sean líderes positivos, personas empáticas y ciudadanos comprometidos con el bienestar de los demás. Aspiramos a que cada niño y joven que pase por nuestras aulas lleve consigo no solo conocimientos académicos, sino también valores sólidos, habilidades emocionales y la seguridad de que puede contribuir al cambio en su entorno.
-
-Para lograr esta visión, nos comprometemos a:
-
-Seguir innovando en nuestras metodologías de enseñanza, integrando estrategias que promuevan el bienestar emocional y el aprendizaje significativo.
-Fomentar una comunidad educativa colaborativa, en la que estudiantes, docentes y familias trabajen juntos en la construcción de un entorno positivo.
-Potenciar el liderazgo y la autonomía de nuestros estudiantes, brindándoles herramientas para que sean agentes de cambio en su entorno.
-Garantizar un ambiente de respeto, inclusión y diversidad, en el que cada estudiante se sienta valorado y aceptado.
-Creemos que la educación es el camino para transformar vidas, y estamos comprometidos a formar generaciones que no solo sean exitosas en lo académico, sino también en lo humano.</p>
-        </div>
-        <div class="card">
-            <h3 style="color: #1f618d; font-size: 22px;text-align:left;">Nuestro Objetivo</h3>
-            <p style="olor: #566573  ;text-align: justify">Nuestro principal objetivo es brindar una educación integral que no solo prepare a nuestros estudiantes en conocimientos académicos, sino que también los dote de herramientas emocionales y sociales que les permitan enfrentar con éxito los retos del mundo actual.
-
-Para lograrlo, trabajamos en el fortalecimiento de competencias socioemocionales como la autoestima, la resiliencia, la empatía, la toma de decisiones responsables y la regulación emocional. Buscamos que nuestros estudiantes:
-
-Reconozcan y valoren sus características personales, desarrollando una identidad segura y positiva.
-Aprendan a gestionar sus emociones y a expresarlas de manera asertiva.
-Fomenten relaciones sanas y respetuosas con sus compañeros, docentes, familia y comunidad.
-Desarrollen habilidades de liderazgo, trabajo en equipo y resolución de conflictos.
-Adquieran la capacidad de perseverar frente a los desafíos, enfrentando la frustración con estrategias saludables.
-Además, nos aseguramos de que cada estudiante reciba el apoyo necesario para fortalecer su bienestar emocional, impulsando un aprendizaje significativo que los prepare para la vida.</p>
-        </div>
+    <div class="scroll-cue">
+      <span>Descubre más</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
     </div>
-           <img src="https://github.com/Jonnatan1308/EduSer/blob/main/EduSer.png?raw=true" alt="Imagen EduSer"  width="800"><br>
-            <br>
-           <br>
-           <div class="container">
-               <h3 style="color: #1f618d; font-size: 22px;text-align:Center;">Marco de Competencias Socioemocionales</h3>
-                <br>
-                <br>
-               <div class="container">
-            <a style= font-size: text-align:Center; href="https://drive.google.com/file/d/1nwQr-QDokgkvvTl9bP1bWOPyjr67-tC8/view" target="_blank"><img src="alianzaeducativa.png" alt="Alianza Educativa"></a>
-           </div>
-                 </div>
-               <br>
-           <br>
-    <div class="container">
-        <h2>Competencias Socioemocionales</h2>
+  </section>
 
-       
-        
-        <table>
-            <tr>
-                <th>Habilidad</th>
-                <th>Descripción</th>
-                <th>Enlace</th>
-            </tr>
-            <tr><td>💪 Autoconcepto</td><td>Capacidad de reconocer y valorar nuestras características personales, fortalezas y cualidades únicas.</td><td><a href="autoconcepto.html"> Haz clic aquí</a></td></tr>
-            <tr><td>🏆 Autoeficacia</td><td>La confianza en nuestra capacidad para alcanzar objetivos y enfrentar situaciones desafiantes con éxito.</td><td><a href="autoeficacia.html">Haz clic aquí</a></td></tr>
-            <tr><td>😍 Conciencia emocional</td><td>La capacidad de reconocer, identificar y nombrar nuestras emociones, comprendiendo su impacto en nuestros pensamientos, decisiones y comportamientos.</td><td><a href="concienciaemocional.html">Haz clic aquí</a></td></tr>
-            <tr><td>🧠 Manejo de emociones</td><td>La habilidad para regular la intensidad y la duración de nuestras emociones, permitiéndonos responder de manera adecuada a diversas situaciones y mantener un equilibrio emocional.</td><td><a href="manejodeemociones.html">Haz clic aquí</a></td></tr>
-            <tr><td>⏳ Postergación de la gratificación</td><td>La capacidad de posponer la búsqueda de placer inmediato para concentrarnos en el logro de metas a largo plazo.</td><td><a href="postergaciondelagratificacion.html">Haz clic aquí</a></td></tr>
-            <tr><td>😔 Tolerancia a la frustración</td><td>La capacidad de aceptar y gestionar situaciones difíciles sin rendirse.</td><td><a href="toleranciaalafrustracion.html">Haz clic aquí</a></td></tr>
-            <tr><td>💡 Toma de perspectiva</td><td>La habilidad para comprender situaciones desde diversos puntos de vista, promoviendo la empatía.</td><td><a href="tomadeperspectiva.html">Haz clic aquí</a></td></tr>
-            <tr><td>🤝 Empatía</td><td>La capacidad de sentir y comprender las emociones de los demás, favoreciendo la conexión y la compasión.</td><td><a href="empatia.html">Haz clic aquí</a></td></tr>
-            <tr><td>💪 Comportamiento prosocial</td><td>La acción de colaborar de manera altruista y cooperativa para alcanzar un objetivo común.</td><td><a href="comportamientoprosocial.html">Haz clic aquí</a></td></tr>
-            <tr><td>🌊 Escucha activa</td><td>La habilidad de prestar atención plena a los demás, mostrando interés genuino.</td><td><a href="escuchaactiva.html">Haz clic aquí</a></td></tr>
-            <tr><td>💥 Asertividad</td><td>La capacidad de expresar pensamientos y emociones de manera clara y respetuosa.</td><td><a href="asertividad.html">Haz clic aquí</a></td></tr>
-            <tr><td>🔄 Manejo de conflictos</td><td>La habilidad para resolver desacuerdos mediante soluciones equitativas.</td><td><a href="manejodeconflictos.html">Haz clic aquí</a></td></tr>
-            <tr><td>🏆 Motivación al logro</td><td>La fuerza que nos impulsa a alcanzar nuestras metas y objetivos.</td><td><a href="motivacionallogro.html">Haz clic aquí</a></td></tr>
-            <tr><td>💪 Perseverancia</td><td>La capacidad de mantener el esfuerzo y la determinación incluso ante obstáculos.</td><td><a href="perseverancia.html">Haz clic aquí</a></td></tr>
-            <tr><td>🤖 Manejo del estrés</td><td>La implementación de estrategias efectivas para reducir la presión diaria y promover bienestar.</td><td><a href="manejodelestres.html">Haz clic aquí</a></td></tr>
-            <tr><td>🔄 Generación de opciones</td><td>La capacidad de considerar diversas soluciones para tomar decisiones informadas.</td><td><a href="generaciondeopciones.html">Haz clic aquí</a></td></tr>
-            <tr><td>🧠 Pensamiento crítico</td><td>La habilidad de reflexionar analíticamente y considerar diversas perspectivas.</td><td><a href="pensamientocritico.html">Haz clic aquí</a></td></tr>
-            <tr><td>🔍 Análisis de consecuencias</td><td>La capacidad de identificar y evaluar los efectos de diversas decisiones.</td><td><a href="analisisdeconsecuencias.html">Haz clic aquí</a></td></tr>
-        </table>
+  <!-- ================= DIVISOR ================= -->
+  <div class="divider" aria-hidden="true">
+    <span class="line"></span>
+    <span class="diamond"></span>
+    <span class="line right"></span>
+  </div>
+
+  <!-- ================= ENLACES ================= -->
+  <section class="links-section">
+    <div class="wrap">
+      <p class="eyebrow">Sigue la expedición</p>
+
+      <div class="card-grid">
+
+        <a class="card" href="#" target="_blank" rel="noopener" aria-label="TikTok de Científicos de la Historia">
+          <span class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M16.5 3c.4 2.1 1.8 3.6 4 3.9v2.6c-1.4.1-2.7-.3-4-1.1v6.4a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v2.7a2.9 2.9 0 1 0 2.1 2.8V3h2.6Z"/>
+            </svg>
+          </span>
+          <span class="label">
+            <span class="name">TikTok</span>
+            <span class="handle">@cientificosdelahistoria</span>
+          </span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+
+        <a class="card" href="#" target="_blank" rel="noopener" aria-label="Instagram de Científicos de la Historia">
+          <span class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="3" y="3" width="18" height="18" rx="5"/>
+              <circle cx="12" cy="12" r="4.2"/>
+              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="label">
+            <span class="name">Instagram</span>
+            <span class="handle">@cientificosdelahistoria</span>
+          </span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+
+        <a class="card" href="#" target="_blank" rel="noopener" aria-label="YouTube de Científicos de la Historia">
+          <span class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <rect x="2.5" y="5.5" width="19" height="13" rx="4"/>
+              <path d="M10.5 9.2 15 12l-4.5 2.8V9.2Z" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="label">
+            <span class="name">YouTube</span>
+            <span class="handle">Científicos de la Historia</span>
+          </span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+
+        <a class="card" href="#" target="_blank" rel="noopener" aria-label="Facebook de Científicos de la Historia">
+          <span class="icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <circle cx="12" cy="12" r="9.2"/>
+              <path d="M13.8 8.4h1.6V5.8h-1.9c-1.9 0-3 1.1-3 3v1.6H9v2.6h1.5V19h2.6v-6h1.8l.4-2.6h-2.2V9c0-.4.3-.6.7-.6Z" fill="currentColor" stroke="none"/>
+            </svg>
+          </span>
+          <span class="label">
+            <span class="name">Facebook</span>
+            <span class="handle">Científicos de la Historia</span>
+          </span>
+          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+        </a>
+
+      </div>
     </div>
-           
-    <div class="container">
-    ⏳ ¡Gracias por confiar en nosotros! 😊 Agradecimientos y recursos utilizados.⏳ 
-                <br> <a href="Agradecimientos.html"> Clic aquí</a>
-                  </div>
-      <script src="https://cdn.botpress.cloud/webchat/v2.2/inject.js"></script>
-<script src="https://files.bpcontent.cloud/2025/02/01/02/20250201020545-RUJAD2OZ.js"></script>
+  </section>
+
+  <footer>
+    <p class="coords">40° 26′ N · Origen del rumbo</p>
+    <p class="credo">Guiados por la curiosidad, <span class="accent">rumbo al conocimiento</span>.</p>
+  </footer>
+
+<script>
+  // Suaviza el indicador "descubre más": desplaza hacia la sección de enlaces
+  document.querySelector('.scroll-cue')?.addEventListener('click', () => {
+    document.querySelector('.links-section')?.scrollIntoView({ behavior: 'smooth' });
+  });
+</script>
+
 </body>
 </html>
