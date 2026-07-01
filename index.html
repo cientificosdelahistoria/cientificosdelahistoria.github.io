@@ -110,16 +110,17 @@
     align-items:center;
     justify-content:center;
     text-align:center;
-    padding: 64px 22px 40px;
+    padding: 48px 22px 90px;
     position:relative;
+    gap: 8px;
   }
 
   /* ---- Insignia / logotipo ---- */
   .logo-badge{
     position:relative;
-    width: 132px;
-    height: 132px;
-    margin-bottom: 26px;
+    width: 220px;
+    height: 220px;
+    margin-bottom: 32px;
   }
   .logo-badge::before{
     content:'';
@@ -153,7 +154,7 @@
   }
 
   @media (min-width:560px){
-    .logo-badge{ width:168px; height:168px; }
+    .logo-badge{ width: 300px; height: 300px; }
   }
 
   .hero h1{
@@ -188,6 +189,7 @@
     color: var(--text-main);
     max-width: 480px;
     text-shadow: 0 2px 18px rgba(0,0,0,.6);
+    margin-top: 12px;
   }
 
   .hero p.tagline .accent{
@@ -198,15 +200,13 @@
   }
 
   .scroll-cue{
-    position:absolute;
-    bottom: 26px;
-    left:50%;
-    transform: translateX(-50%);
+    margin-top: 30px;
     display:flex;
     flex-direction:column;
     align-items:center;
     gap:6px;
     color: var(--cyan-dim);
+    cursor: pointer;
   }
   .scroll-cue span{
     font-family: var(--font-mono);
@@ -408,17 +408,16 @@
       </span>
     </div>
 
-    <div class="scroll-cue">
-      <p class="tagline">
-  🧭 Nuestra brújula del conocimiento se detiene en las coordenadas exactas donde nació el pensamiento moderno. Te damos la bienvenida a esta gran expedición a través de la línea del tiempo, un espacio dedicado a desenterrar los misterios, las fórmulas y los descubrimientos revolucionarios de las mentes más brillantes de la humanidad.
-  <br><br>
-  Desde los antiguos laboratorios alquímicos hasta las fronteras de la física cuántica, rastreamos la huella indeleble de quienes desafiaron el orden establecido para iluminar el porvenir. ¡La historia de la ciencia espera ser revelada! ⚡️💡🚀
-</p>
+    <p class="tagline">
+      🧭 Nuestra brújula del conocimiento se detiene en las coordenadas exactas donde nació el pensamiento moderno. Te damos la bienvenida a esta gran expedición a través de la línea del tiempo, un espacio dedicado a desenterrar los misterios, las fórmulas y los descubrimientos revolucionarios de las mentes más brillantes de la humanidad.
+      <br><br>
+      Desde los antiguos laboratorios alquímicos hasta las fronteras de la física cuántica, rastreamos la huella indeleble de quienes desafiaron el orden establecido para iluminar el porvenir. ¡La historia de la ciencia espera ser revelada! ⚡️💡🚀
+    </p>
 
-<div class="scroll-cue">
-  <span>Descubre más</span>
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-</div>
+    <div class="scroll-cue">
+      <span>Descubre más</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
   </section>
 
   <!-- ================= DIVISOR ================= -->
@@ -458,7 +457,7 @@
           </span>
           <span class="label">
             <span class="name">Instagram</span>
-            <span class="handle">  @cientificoshistoria</span>
+            <span class="handle">@cientificoshistoria</span>
           </span>
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
         </a>
@@ -496,7 +495,6 @@
   </section>
 
   <footer>
-   
     <p class="credo">Guiados por la curiosidad, <span class="accent">rumbo al conocimiento</span>.</p>
   </footer>
 
