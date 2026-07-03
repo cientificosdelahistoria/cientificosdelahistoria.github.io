@@ -94,10 +94,72 @@
   /* ---------------------------------------------
      LAYOUT GENERAL
   --------------------------------------------- */
+  .main-content {
+    position: relative;
+    z-index: 1; /* Asegura que el contenido central esté por encima de las imágenes laterales */
+  }
+
   .wrap{
     max-width: 620px;
     margin: 0 auto;
     padding: 0 22px;
+  }
+
+  /* ---------------------------------------------
+     GALERÍAS LATERALES (4 imágenes por lado)
+  --------------------------------------------- */
+  .side-gallery {
+    display: none; /* Oculto en móviles para no amontonar el contenido */
+  }
+
+  /* Solo se muestran en pantallas grandes (computadoras/tablets anchas) */
+  @media (min-width: 1100px) {
+    .side-gallery {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 20px;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 180px; /* Ancho de la columna de imágenes */
+      z-index: 0;
+      padding: 20px 0;
+    }
+    
+    .side-gallery.left { left: 4%; }
+    .side-gallery.right { right: 4%; }
+
+    .side-gallery img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1.2; /* Formato ligeramente vertical (retrato) */
+      border-radius: 10px;
+      border: var(--border-hair);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.6);
+      opacity: 0.65;
+      transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+      /* Un filtro para que combinen con la estética oscura, se quita al pasar el mouse */
+      filter: grayscale(30%) sepia(10%) brightness(0.8); 
+    }
+
+    .side-gallery img:hover {
+      opacity: 1;
+      transform: scale(1.08) translateY(-4px);
+      filter: grayscale(0%) sepia(0%) brightness(1.1);
+      border-color: var(--cyan-neon);
+      box-shadow: 0 10px 24px rgba(94,234,224,0.3);
+      z-index: 2;
+      position: relative;
+    }
+  }
+
+  @media (min-width: 1400px) {
+    /* Pantallas extra grandes */
+    .side-gallery { width: 220px; }
+    .side-gallery.left { left: 8%; }
+    .side-gallery.right { right: 8%; }
   }
 
   /* ---------------------------------------------
@@ -112,10 +174,8 @@
     text-align:center;
     padding: 48px 22px 90px;
     position:relative;
-    gap: 8px;
   }
 
-  /* ---- Insignia / logotipo ---- */
   .logo-badge{
     position:relative;
     width: 220px;
@@ -189,7 +249,6 @@
     color: var(--text-main);
     max-width: 480px;
     text-shadow: 0 2px 18px rgba(0,0,0,.6);
-    margin-top: 12px;
   }
 
   .hero p.tagline .accent{
@@ -200,7 +259,10 @@
   }
 
   .scroll-cue{
-    margin-top: 30px;
+    position:absolute;
+    bottom: 26px;
+    left:50%;
+    transform: translateX(-50%);
     display:flex;
     flex-direction:column;
     align-items:center;
@@ -397,109 +459,129 @@
   <div class="bg-layer" aria-hidden="true"></div>
   <div class="bg-veil" aria-hidden="true"></div>
 
-  <!-- ================= HERO ================= -->
-  <section class="hero">
-    <div class="logo-badge">
-      <span class="ring">
-        <picture>
-          <source srcset="logo.webp" type="image/webp">
-          <img src="logo.png" alt="Científicos de la Historia — brújula, engranajes y anillos de átomo">
-        </picture>
-      </span>
-    </div>
+  <!-- ================= GALERÍA IZQUIERDA ================= -->
+  <aside class="side-gallery left">
+    <img src="ruta-de-tu-imagen-izq-1.jpg" alt="Científico histórico 1">
+    <img src="ruta-de-tu-imagen-izq-2.jpg" alt="Científico histórico 2">
+    <img src="ruta-de-tu-imagen-izq-3.jpg" alt="Científico histórico 3">
+    <img src="ruta-de-tu-imagen-izq-4.jpg" alt="Científico histórico 4">
+  </aside>
 
-    <p class="tagline">
-      🧭 Nuestra brújula del conocimiento se detiene en las coordenadas exactas donde nació el pensamiento moderno. Te damos la bienvenida a esta gran expedición a través de la línea del tiempo, un espacio dedicado a desenterrar los misterios, las fórmulas y los descubrimientos revolucionarios de las mentes más brillantes de la humanidad.
-      <br><br>
-      Desde los antiguos laboratorios alquímicos hasta las fronteras de la física cuántica, rastreamos la huella indeleble de quienes desafiaron el orden establecido para iluminar el porvenir. ¡La historia de la ciencia espera ser revelada! ⚡️💡🚀
-    </p>
+  <!-- ================= GALERÍA DERECHA ================= -->
+  <aside class="side-gallery right">
+    <img src="ruta-de-tu-imagen-der-1.jpg" alt="Científico histórico 5">
+    <img src="ruta-de-tu-imagen-der-2.jpg" alt="Científico histórico 6">
+    <img src="ruta-de-tu-imagen-der-3.jpg" alt="Científico histórico 7">
+    <img src="ruta-de-tu-imagen-der-4.jpg" alt="Científico histórico 8">
+  </aside>
 
-    <div class="scroll-cue">
-      <span>Descubre más</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-    </div>
-  </section>
-
-  <!-- ================= DIVISOR ================= -->
-  <div class="divider" aria-hidden="true">
-    <span class="line"></span>
-    <span class="diamond"></span>
-    <span class="line right"></span>
-  </div>
-
-  <!-- ================= ENLACES ================= -->
-  <section class="links-section">
-    <div class="wrap">
-      <p class="eyebrow">Siguenos en nuestras redes sociales</p>
-
-      <div class="card-grid">
-
-        <a class="card" href="https://www.tiktok.com/@cientificosdelahistoria" target="_blank" rel="noopener" aria-label="TikTok de Científicos de la Historia">
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-              <path d="M16.5 3c.4 2.1 1.8 3.6 4 3.9v2.6c-1.4.1-2.7-.3-4-1.1v6.4a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v2.7a2.9 2.9 0 1 0 2.1 2.8V3h2.6Z"/>
-            </svg>
-          </span>
-          <span class="label">
-            <span class="name">TikTok</span>
-            <span class="handle">@cientificosdelahistoria</span>
-          </span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
-
-        <a class="card" href="https://www.instagram.com/cientificoshistoria/" target="_blank" rel="noopener" aria-label="Instagram de Científicos de la Historia">
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <rect x="3" y="3" width="18" height="18" rx="5"/>
-              <circle cx="12" cy="12" r="4.2"/>
-              <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
-            </svg>
-          </span>
-          <span class="label">
-            <span class="name">Instagram</span>
-            <span class="handle">@cientificoshistoria</span>
-          </span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
-
-        <a class="card" href="https://www.youtube.com/@CientificosDeLaHistoria" target="_blank" rel="noopener" aria-label="YouTube de Científicos de la Historia">
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <rect x="2.5" y="5.5" width="19" height="13" rx="4"/>
-              <path d="M10.5 9.2 15 12l-4.5 2.8V9.2Z" fill="currentColor" stroke="none"/>
-            </svg>
-          </span>
-          <span class="label">
-            <span class="name">YouTube</span>
-            <span class="handle">Científicos de la Historia</span>
-          </span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
-
-        <a class="card" href="https://www.facebook.com/profile.php?id=61577496146715" target="_blank" rel="noopener" aria-label="Facebook de Científicos de la Historia">
-          <span class="icon-wrap">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-              <circle cx="12" cy="12" r="9.2"/>
-              <path d="M13.8 8.4h1.6V5.8h-1.9c-1.9 0-3 1.1-3 3v1.6H9v2.6h1.5V19h2.6v-6h1.8l.4-2.6h-2.2V9c0-.4.3-.6.7-.6Z" fill="currentColor" stroke="none"/>
-            </svg>
-          </span>
-          <span class="label">
-            <span class="name">Facebook</span>
-            <span class="handle">Científicos de la Historia</span>
-          </span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
-        </a>
-
+  <!-- Envolvemos el contenido principal para manejar las capas (z-index) -->
+  <main class="main-content">
+    
+    <!-- ================= HERO ================= -->
+    <section class="hero">
+      <div class="logo-badge">
+        <span class="ring">
+          <picture>
+            <source srcset="logo.webp" type="image/webp">
+            <img src="logo.png" alt="Científicos de la Historia — brújula, engranajes y anillos de átomo">
+          </picture>
+        </span>
       </div>
-    </div>
-  </section>
 
-  <footer>
-    <p class="credo">Guiados por la curiosidad, <span class="accent">rumbo al conocimiento</span>.</p>
-  </footer>
+      <p class="tagline">
+        🧭 Nuestra brújula del conocimiento se detiene en las coordenadas exactas donde nació el pensamiento moderno. Te damos la bienvenida a esta gran expedición a través de la línea del tiempo, un espacio dedicado a desenterrar los misterios, las fórmulas y los descubrimientos revolucionarios de las mentes más brillantes de la humanidad.
+        <br><br>
+        Desde los antiguos laboratorios alquímicos hasta las fronteras de la física cuántica, rastreamos la huella indeleble de quienes desafiaron el orden establecido para iluminar el porvenir. ¡La historia de la ciencia espera ser revelada! ⚡️💡🚀
+      </p>
+
+      <div class="scroll-cue">
+        <span>Descubre más</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </div>
+    </section>
+
+    <!-- ================= DIVISOR ================= -->
+    <div class="divider" aria-hidden="true">
+      <span class="line"></span>
+      <span class="diamond"></span>
+      <span class="line right"></span>
+    </div>
+
+    <!-- ================= ENLACES ================= -->
+    <section class="links-section">
+      <div class="wrap">
+        <p class="eyebrow">Síguenos en nuestras redes sociales</p>
+
+        <div class="card-grid">
+
+          <a class="card" href="https://www.tiktok.com/@cientificosdelahistoria" target="_blank" rel="noopener" aria-label="TikTok de Científicos de la Historia">
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M16.5 3c.4 2.1 1.8 3.6 4 3.9v2.6c-1.4.1-2.7-.3-4-1.1v6.4a5.6 5.6 0 1 1-5.6-5.6c.3 0 .6 0 .9.1v2.7a2.9 2.9 0 1 0 2.1 2.8V3h2.6Z"/>
+              </svg>
+            </span>
+            <span class="label">
+              <span class="name">TikTok</span>
+              <span class="handle">@cientificosdelahistoria</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+
+          <a class="card" href="https://www.instagram.com/cientificoshistoria/" target="_blank" rel="noopener" aria-label="Instagram de Científicos de la Historia">
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="5"/>
+                <circle cx="12" cy="12" r="4.2"/>
+                <circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <span class="label">
+              <span class="name">Instagram</span>
+              <span class="handle">@cientificoshistoria</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+
+          <a class="card" href="https://www.youtube.com/@CientificosDeLaHistoria" target="_blank" rel="noopener" aria-label="YouTube de Científicos de la Historia">
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <rect x="2.5" y="5.5" width="19" height="13" rx="4"/>
+                <path d="M10.5 9.2 15 12l-4.5 2.8V9.2Z" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <span class="label">
+              <span class="name">YouTube</span>
+              <span class="handle">Científicos de la Historia</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+
+          <a class="card" href="https://www.facebook.com/profile.php?id=61577496146715" target="_blank" rel="noopener" aria-label="Facebook de Científicos de la Historia">
+            <span class="icon-wrap">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <circle cx="12" cy="12" r="9.2"/>
+                <path d="M13.8 8.4h1.6V5.8h-1.9c-1.9 0-3 1.1-3 3v1.6H9v2.6h1.5V19h2.6v-6h1.8l.4-2.6h-2.2V9c0-.4.3-.6.7-.6Z" fill="currentColor" stroke="none"/>
+              </svg>
+            </span>
+            <span class="label">
+              <span class="name">Facebook</span>
+              <span class="handle">Científicos de la Historia</span>
+            </span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8"/></svg>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p class="credo">Guiados por la curiosidad, <span class="accent">rumbo al conocimiento</span>.</p>
+    </footer>
+
+  </main>
 
 <script>
-  // Suaviza el indicador "descubre más": desplaza hacia la sección de enlaces
   document.querySelector('.scroll-cue')?.addEventListener('click', () => {
     document.querySelector('.links-section')?.scrollIntoView({ behavior: 'smooth' });
   });
